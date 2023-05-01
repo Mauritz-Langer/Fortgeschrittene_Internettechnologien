@@ -1,76 +1,102 @@
-<div class="m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-    <form class="row g-3 m-4">
-        <h3>Registrieren</h3>
-        <div class="col-md-6">
-            <label for="inputName" class="form-label">Vorname</label>
-            <input type="text" class="form-control" id="inputName">
-        </div>
-        <div class="col-md-6">
-            <label for="inputSurname" class="form-label">Nachname</label>
-            <input type="text" class="form-control" id="inputSurname">
-        </div>
 
-        <div class="col-md-12">
-            <label for="inputUsername" class="form-label">Gewünschter Benutzername</label>
-            <input type="text" class="form-control" id="inputUsername">
-        </div>
+    <div class="position-relative m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded-4">
 
-        <div class="col-md-6">
-            <label for="inputEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputEmail">
-        </div>
+        <form class="position-relative row g-3 m-4 z-1 needs-validation" novalidate>
+            <h3>Registrieren</h3>
+            <div class="col-md-6">
+                <label for="inputName" class="form-label">Vorname</label>
+                <input type="text" class="form-control" id="inputName">
+            </div>
+            <div class="col-md-6">
+                <label for="inputSurname" class="form-label">Nachname</label>
+                <input type="text" class="form-control" id="inputSurname">
+            </div>
 
-        <div class="col-md-6">
-            <label for="inputPassword" class="form-label">Passwort</label>
-            <input type="password" class="form-control" id="inputPassword">
-        </div>
+            <div class="col-md-12">
+                <label for="inputUsername" class="form-label">Gewünschter Benutzername</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                    <input type="text" class="form-control" id="inputUsername" aria-describedby="inputGroupPrepend" required>
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                </div>
+            </div>
 
-        <div class="col-6">
-            <label for="inputStreet" class="form-label">Straße</label>
-            <input type="text" class="form-control" id="inputStreet">
-        </div>
+            <div class="col-md-6">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail">
+            </div>
 
-        <div class="col-6">
-            <label for="inputHouseNumber" class="form-label">Hausnummer</label>
-            <input type="text" class="form-control" id="inputHouseNumber">
-        </div>
+            <div class="col-md-6">
+                <label for="inputPassword" class="form-label">Passwort</label>
+                <input type="password" class="form-control" id="inputPassword">
+            </div>
 
-        <div class="col-md-6">
-            <label for="inputCity" class="form-label">Ort</label>
-            <input type="text" class="form-control" id="inputCity">
-        </div>
-        <div class="col-md-4">
-            <label for="inputState" class="form-label">Land</label>
-            <select id="inputState" class="form-select">
-                <option selected>Choose...</option>
-                <option value="Baden-Württemberg">Baden-Württemberg</option>
-                <option value="Bavaria">Bavaria</option>
-                <option value="Berlin">Berlin</option>
-                <option value="Brandenburg">Brandenburg</option>
-                <option value="Bremen">Bremen</option>
-                <option value="Hamburg">Hamburg</option>
-                <option value="Hesse">Hesse</option>
-                <option value="Lower Saxony">Lower Saxony</option>
-                <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
-                <option value="North Rhine-Westphalia">North Rhine-Westphalia</option>
-                <option value="Rhineland-Palatinate">Rhineland-Palatinate</option>
-                <option value="Saarland">Saarland</option>
-                <option value="Saxony">Saxony</option>
-                <option value="Saxony-Anhalt">Saxony-Anhalt</option>
-                <option value="Schleswig-Holstein">Schleswig-Holstein</option>
-                <option value="Thuringia">Thuringia</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label for="inputZip" class="form-label">PLZ</label>
-            <input type="text" class="form-control" id="inputZip">
-        </div>
-        <div class="col-md-6">
-            <label for="inputSecurityQuestion" class="form-label">Lösen Sie 8 + 1 =</label>
-            <input type="text" class="form-control" id="inputSecurityQuestion">
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Registrieren</button>
-        </div>
-    </form>
-</div>
+            <div class="col-md-6">
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        <label for="inputStreet" class="form-label">Straße</label>
+                        <input type="text" class="form-control" id="inputStreet">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="inputHouseNumber" class="form-label">Hausnummer</label>
+                        <input type="text" class="form-control" id="inputHouseNumber">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="inputState" class="form-label">Land</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Choose...</option>
+                            <option value="Baden-Württemberg">Baden-Württemberg</option>
+                            <option value="Bavaria">Bavaria</option>
+                            <option value="Berlin">Berlin</option>
+                            <option value="Brandenburg">Brandenburg</option>
+                            <option value="Bremen">Bremen</option>
+                            <option value="Hamburg">Hamburg</option>
+                            <option value="Hesse">Hesse</option>
+                            <option value="Lower Saxony">Lower Saxony</option>
+                            <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
+                            <option value="North Rhine-Westphalia">North Rhine-Westphalia</option>
+                            <option value="Rhineland-Palatinate">Rhineland-Palatinate</option>
+                            <option value="Saarland">Saarland</option>
+                            <option value="Saxony">Saxony</option>
+                            <option value="Saxony-Anhalt">Saxony-Anhalt</option>
+                            <option value="Schleswig-Holstein">Schleswig-Holstein</option>
+                            <option value="Thuringia">Thuringia</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="inputCity" class="form-label">Ort</label>
+                        <input type="text" class="form-control" id="inputCity">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="inputZip" class="form-label">PLZ</label>
+                        <input type="text" class="form-control" id="inputZip">
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <label for="inputSecurityQuestion" class="form-label">Lösen Sie 8 + 1 =</label>
+                        <input type="text" class="form-control" id="inputSecurityQuestion">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
+                        <div style="height:475px; width:100%;">
+                            <iframe style="height:100%;width:100%;border-radius: 18px;"
+                                    src="https://www.google.com/maps/embed/v1/place?q=Lange+Straße+7,+Hamm,+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Registrieren</button>
+            </div>
+
+        </form>
+    </div>
+
+

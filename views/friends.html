@@ -1,7 +1,9 @@
-<div class="m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-    <form class="row g-3 m-4">
+<div class="position-relative m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded-4">
+<form class="row g-3 m-4">
+
         <h3>Wo befinden sich meine Freunde?</h3>
-        <div class="row col-6">
+    <div class="col-md-6">
+        <div class="row g-3">
             <div class="col-md-12">
                 <label for="inputUsername" class="form-label">Benutzererkennung</label>
                 <input type="text" class="form-control" id="inputUsername">
@@ -33,25 +35,28 @@
                             <button type="button" class="btn-close" aria-label="Close"></button>
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>MauritzLanger</td>
+                        <td>
+                            <button type="button" class="btn-close" aria-label="Close"></button>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-12 shadow-lg bg-body-tertiary rounded p-0"
-             style="max-width:100%;overflow:hidden;color:red;width:500px;height:500px;">
-            <div id="embed-map-display" style="height:100%; width:100%;max-width:100%;">
-                <iframe style="height:100%;width:100%;border:0;" frameborder="0"
+
+    <div class="col-md-6">
+        <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
+            <div style="height:475px; width:100%;">
+                <iframe style="height:100%;width:100%;border-radius: 18px;"
                         src="https://www.google.com/maps/embed/v1/place?q=Lange+Straße+7,+Hamm,+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
             </div>
-
-            <style>#embed-map-display img {
-                max-width: none !important;
-                background: none !important;
-                font-size: inherit;
-                font-weight: inherit;
-            }</style>
         </div>
+    </div>
     </form>
 
 
