@@ -1,18 +1,19 @@
 <div class="position-relative m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded-4">
-<form class="row g-3 m-4">
+<form id="addUser" class="row g-3 m-4">
 
         <h3>Wo befinden sich meine Freunde?</h3>
     <div class="col-md-6">
         <div class="row g-3">
             <div class="col-md-12">
-                <label for="inputUsername" class="form-label">Benutzererkennung</label>
-                <input type="text" class="form-control" id="inputUsername">
+                <label for="inputUsernameFriends" class="form-label">Benutzer</label>
+                <select id="inputUsernameFriends" name="inputUsernameFriends" class="form-select">
+                </select>
             </div>
             <div class="col-md-12">
                 <button type="submit" class="btn btn-primary">Hinzufügen</button>
             </div>
             <div class="col-md-12">
-                <table class="table table-hover">
+                <table id="storedUsers" class="table table-hover">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -21,27 +22,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>BenyaminRad</td>
-                        <td>
-                            <button type="button" class="btn-close" aria-label="Close"></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>MauritzLanger</td>
-                        <td>
-                            <button type="button" class="btn-close" aria-label="Close"></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>MauritzLanger</td>
-                        <td>
-                            <button type="button" class="btn-close" aria-label="Close"></button>
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -62,3 +42,75 @@
 
 
 </div>
+
+
+<script>
+
+    $(document).ready(function() {
+        getUsers(sessionStorage.getItem('username'), sessionStorage.getItem('sessionID'))
+
+        $('#addUser').submit(function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = document.getElementById('addUser');
+            var formData = new FormData(form);
+
+            var storedUsers = [];
+
+            if (sessionStorage.getItem("storedUsers") === null){
+                storedUsers.push(JSON.parse(formData.get('inputUsernameFriends')))
+            } else {
+                storedUsers = JSON.parse(sessionStorage.getItem("storedUsers"))
+                if (!storedUsers.find(e => JSON.stringify(e) ===  formData.get('inputUsernameFriends'))){
+                    storedUsers.push(JSON.parse(formData.get('inputUsernameFriends')))
+                }
+            }
+            sessionStorage.setItem("storedUsers", JSON.stringify(storedUsers))
+            fillTable(storedUsers)
+        });
+    });
+
+    function fillDropdown(data) {
+
+        var benutzer = data.benutzerliste
+
+        var select = $('#inputUsernameFriends');
+
+        select.empty();
+
+        for (var i = 0; i < benutzer.length; i++) {
+            $('<option>').val(JSON.stringify(benutzer[i])).text(benutzer[i].vorname + ' ' + benutzer[i].nachname).appendTo(select);
+        }
+    }
+
+    function fillTable(users){
+
+        var table = $('#storedUsers');
+        var tbody = table.find('tbody');
+        tbody.empty()
+
+        for (var i = 0; i < users.length; i++) {
+            var row = $('<tr>');
+            $('<th scope="row">').text(i+1).appendTo(row);
+            $('<td>').text(users[i].vorname + ' ' + users[i].nachname).appendTo(row);
+            var button = $('<button>');
+            button.attr('type', 'button')
+            button.attr('aria-label', 'Close')
+            button.attr('class', 'btn-close')
+            button.attr('onclick', 'deleteFromTable(' + JSON.stringify(users[i]) + ');')
+            $('<td>').append(button).appendTo(row);
+            tbody.append(row);
+        }
+    }
+
+    function deleteFromTable(user){
+        var users = JSON.parse(sessionStorage.getItem("storedUsers"))
+
+        users = users.filter(function (obj) {
+            return JSON.stringify(obj) !== JSON.stringify(user)
+        })
+
+        sessionStorage.setItem("storedUsers", JSON.stringify(users))
+        fillTable(users)
+    }
+</script>

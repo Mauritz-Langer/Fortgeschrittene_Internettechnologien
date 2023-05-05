@@ -1,22 +1,22 @@
 
     <div class="position-relative m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded-4">
 
-        <form class="position-relative row g-3 m-4 z-1 needs-validation" novalidate>
+        <form id="register" class="position-relative row g-3 m-4 z-1 needs-validation" novalidate>
             <h3>Registrieren</h3>
             <div class="col-md-6">
-                <label for="inputName" class="form-label">Vorname</label>
-                <input type="text" class="form-control" id="inputName">
+                <label for="inputNameRegister" class="form-label">Vorname</label>
+                <input type="text" class="form-control" id="inputNameRegister" name="inputName">
             </div>
             <div class="col-md-6">
-                <label for="inputSurname" class="form-label">Nachname</label>
-                <input type="text" class="form-control" id="inputSurname">
+                <label for="inputSurnameRegister" class="form-label">Nachname</label>
+                <input type="text" class="form-control" id="inputSurnameRegister" name="inputSurname">
             </div>
 
             <div class="col-md-12">
-                <label for="inputUsername" class="form-label">Gewünschter Benutzername</label>
+                <label for="inputUsernameRegister" class="form-label">Gewünschter Benutzername</label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend">@</span>
-                    <input type="text" class="form-control" id="inputUsername" aria-describedby="inputGroupPrepend" required>
+                    <input type="text" class="form-control" id="inputUsernameRegister" name="inputUsername" aria-describedby="inputGroupPrepend" required>
                     <div class="invalid-feedback">
                         Please choose a username.
                     </div>
@@ -24,61 +24,54 @@
             </div>
 
             <div class="col-md-6">
-                <label for="inputEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail">
+                <label for="inputEmailRegister" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmailRegister" name="inputEmail">
             </div>
 
             <div class="col-md-6">
-                <label for="inputPassword" class="form-label">Passwort</label>
-                <input type="password" class="form-control" id="inputPassword">
+                <label for="inputPasswordRegister" class="form-label">Passwort</label>
+                <input type="password" class="form-control" id="inputPasswordRegister" name="inputPassword">
             </div>
 
             <div class="col-md-6">
                 <div class="row g-3">
                     <div class="col-md-12">
-                        <label for="inputStreet" class="form-label">Straße</label>
-                        <input type="text" class="form-control" id="inputStreet">
+                        <label for="inputStreetRegister" class="form-label">Straße</label>
+                        <input type="text" class="form-control" id="inputStreetRegister" name="inputStreet">
                     </div>
 
                     <div class="col-md-12">
-                        <label for="inputHouseNumber" class="form-label">Hausnummer</label>
-                        <input type="text" class="form-control" id="inputHouseNumber">
+                        <label for="inputHouseNumberRegister" class="form-label">Hausnummer</label>
+                        <input type="text" class="form-control" id="inputHouseNumberRegister" name="inputHouseNumber">
                     </div>
+
                     <div class="col-md-12">
-                        <label for="inputState" class="form-label">Land</label>
-                        <select id="inputState" class="form-select">
-                            <option selected>Choose...</option>
-                            <option value="Baden-Württemberg">Baden-Württemberg</option>
-                            <option value="Bavaria">Bavaria</option>
-                            <option value="Berlin">Berlin</option>
-                            <option value="Brandenburg">Brandenburg</option>
-                            <option value="Bremen">Bremen</option>
-                            <option value="Hamburg">Hamburg</option>
-                            <option value="Hesse">Hesse</option>
-                            <option value="Lower Saxony">Lower Saxony</option>
-                            <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
-                            <option value="North Rhine-Westphalia">North Rhine-Westphalia</option>
-                            <option value="Rhineland-Palatinate">Rhineland-Palatinate</option>
-                            <option value="Saarland">Saarland</option>
-                            <option value="Saxony">Saxony</option>
-                            <option value="Saxony-Anhalt">Saxony-Anhalt</option>
-                            <option value="Schleswig-Holstein">Schleswig-Holstein</option>
-                            <option value="Thuringia">Thuringia</option>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="inputZipRegister" class="form-label">PLZ</label>
+                                <input type="text" class="form-control" id="inputZipRegister" name="inputZip">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputCityRegister" class="form-label">Ort</label>
+                                <input type="text" class="form-control" id="inputCityRegister" name="inputCity">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="inputStateRegister" class="form-label">Land</label>
+                        <select id="inputStateRegister" name="inputState" class="form-select">
                         </select>
                     </div>
-                    <div class="col-md-12">
-                        <label for="inputCity" class="form-label">Ort</label>
-                        <input type="text" class="form-control" id="inputCity">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="inputZip" class="form-label">PLZ</label>
-                        <input type="text" class="form-control" id="inputZip">
-                    </div>
-
 
                     <div class="col-md-12">
-                        <label for="inputSecurityQuestion" class="form-label">Lösen Sie 8 + 1 =</label>
-                        <input type="text" class="form-control" id="inputSecurityQuestion">
+                        <label for="inputPhoneRegister" class="form-label">Telefon</label>
+                        <input type="text" class="form-control" id="inputPhoneRegister" name="inputPhone">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="inputSecurityQuestionRegister" class="form-label">Lösen Sie 8 + 1 =</label>
+                        <input type="text" class="form-control" id="inputSecurityQuestionRegister" name="inputSecurityQuestion">
                     </div>
                 </div>
             </div>
@@ -86,8 +79,8 @@
             <div class="col-md-6">
                 <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
                         <div style="height:475px; width:100%;">
-                            <iframe style="height:100%;width:100%;border-radius: 18px;"
-                                    src="https://www.google.com/maps/embed/v1/place?q=Lange+Straße+7,+Hamm,+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                            <iframe id="registerMap" style="height:100%;width:100%;border-radius: 18px;"
+                                    src="https://www.google.com/maps/embed/v1/place?q=+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
                         </div>
                 </div>
             </div>
@@ -99,4 +92,58 @@
         </form>
     </div>
 
+<script>
 
+    var street = '';
+    var houseNumber = '';
+    var city = '';
+    var country = '';
+
+    $(document).ready(function() {
+        getAllCountries('#inputStateRegister')
+
+        $('#register').submit(function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = document.getElementById('register');
+
+            register(event, form);
+        });
+
+        $('#inputStreetRegister').change(function() {
+            var iframe = $('#registerMap');
+            street = $(this).val();
+
+            reloadMap(iframe, street, houseNumber, city, country);
+        });
+
+        $('#inputHouseNumberRegister').change(function() {
+            var iframe = $('#registerMap');
+            houseNumber = $(this).val();
+
+            reloadMap(iframe, street, houseNumber, city, country);
+        });
+
+        $('#inputCityRegister').change(function() {
+            var iframe = $('#registerMap');
+            city = $(this).val();
+
+            reloadMap(iframe, street, houseNumber, city, country);
+        });
+
+        $('#inputStateRegister').change(function() {
+            var iframe = $('#registerMap');
+            country = $(this).val();
+
+            reloadMap(iframe, street, houseNumber, city, country);
+        });
+
+        $('#inputZipRegister').change(function() {
+            var iframe = $('#registerMap');
+            getCityFromPostalCode($(this).val(), '#inputCityRegister', iframe)
+
+        });
+    });
+
+
+</script>

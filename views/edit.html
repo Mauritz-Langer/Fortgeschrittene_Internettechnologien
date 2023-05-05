@@ -1,54 +1,37 @@
 <div class="position-relative m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded-4">
-<form class="row g-3 m-4">
+<form id="setLocation" class="row g-3 m-4">
         <h3>Standort erfassen</h3>
 
 
     <div class="col-md-6">
         <div class="row g-3">
             <div class="col-md-12">
-                <label for="inputUsername" class="form-label">Benutzername</label>
-                <input type="text" class="form-control" id="inputUsername">
+                <label for="inputUsernameEdit" class="form-label">Benutzername</label>
+                <input type="text" class="form-control" id="inputUsernameEdit" name="inputUsernameEdit">
             </div>
 
             <div class="col-12">
                 <label for="inputStreet" class="form-label">Straße</label>
-                <input type="text" class="form-control" id="inputStreet">
+                <input type="text" class="form-control" id="inputStreet" name="inputStreet">
             </div>
 
             <div class="col-12">
                 <label for="inputHouseNumber" class="form-label">Hausnummer</label>
-                <input type="text" class="form-control" id="inputHouseNumber">
+                <input type="text" class="form-control" id="inputHouseNumber" name="inputHouseNumber">
             </div>
 
             <div class="col-md-12">
+                <label for="inputZip" class="form-label">PLZ</label>
+                <input type="text" class="form-control" id="inputZip" name="inputZip">
+            </div>
+            <div class="col-md-12">
                 <label for="inputCity" class="form-label">Ort</label>
-                <input type="text" class="form-control" id="inputCity">
+                <input type="text" class="form-control" id="inputCity" name="inputCity">
             </div>
             <div class="col-md-12">
                 <label for="inputState" class="form-label">Land</label>
-                <select id="inputState" class="form-select">
-                    <option selected>Choose...</option>
-                    <option value="Baden-Württemberg">Baden-Württemberg</option>
-                    <option value="Bavaria">Bavaria</option>
-                    <option value="Berlin">Berlin</option>
-                    <option value="Brandenburg">Brandenburg</option>
-                    <option value="Bremen">Bremen</option>
-                    <option value="Hamburg">Hamburg</option>
-                    <option value="Hesse">Hesse</option>
-                    <option value="Lower Saxony">Lower Saxony</option>
-                    <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
-                    <option value="North Rhine-Westphalia">North Rhine-Westphalia</option>
-                    <option value="Rhineland-Palatinate">Rhineland-Palatinate</option>
-                    <option value="Saarland">Saarland</option>
-                    <option value="Saxony">Saxony</option>
-                    <option value="Saxony-Anhalt">Saxony-Anhalt</option>
-                    <option value="Schleswig-Holstein">Schleswig-Holstein</option>
-                    <option value="Thuringia">Thuringia</option>
+                <select id="inputState" name="inputState" class="form-select">
                 </select>
-            </div>
-            <div class="col-md-12">
-                <label for="inputZip" class="form-label">PLZ</label>
-                <input type="text" class="form-control" id="inputZip">
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Speichern</button>
@@ -59,11 +42,67 @@
     <div class="col-md-6">
         <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
             <div style="height:475px; width:100%;">
-                <iframe style="height:100%;width:100%;border-radius: 18px;"
-                        src="https://www.google.com/maps/embed/v1/place?q=Lange+Straße+7,+Hamm,+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                <iframe id="editMap" style="height:100%;width:100%;border-radius: 18px;"
+                        src="https://www.google.com/maps/embed/v1/place?q=+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
             </div>
         </div>
     </div>
 
     </form>
 </div>
+
+<script>
+    var street = '';
+    var houseNumber = '';
+    var city = '';
+    var country = '';
+
+    $(document).ready(function() {
+        getAllCountries('#inputState')
+
+        $('#inputUsernameEdit').val(sessionStorage.getItem('username')).prop('disabled', true)
+    });
+
+    $('#inputStreet').change(function() {
+        var iframe = $('#editMap');
+        street = $(this).val();
+
+        reloadMap(iframe, street, houseNumber, city, country);
+    });
+
+    $('#inputHouseNumber').change(function() {
+        var iframe = $('#editMap');
+        houseNumber = $(this).val();
+
+        reloadMap(iframe, street, houseNumber, city, country);
+    });
+
+    $('#inputCity').change(function() {
+        var iframe = $('#editMap');
+        city = $(this).val();
+
+        reloadMap(iframe, street, houseNumber, city, country);
+    });
+
+    $('#inputState').change(function() {
+        var iframe = $('#editMap');
+        country = $(this).val();
+
+        reloadMap(iframe, street, houseNumber, city, country);
+    });
+
+    $('#inputZip').change(function() {
+        var iframe = $('#editMap');
+        getCityFromPostalCode($(this).val(), '#inputCity', iframe)
+    });
+
+    $(document).ready(function() {
+        $('#setLocation').submit(function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = document.getElementById('setLocation');
+
+            getStandortByAdress(event, form)
+        });
+    });
+</script>

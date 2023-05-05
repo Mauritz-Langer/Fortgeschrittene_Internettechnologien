@@ -7,9 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" href="#" data-destination='register' onclick="navigateTo('register')">Registrieren</a>
-        <a class="nav-link " href="#" data-destination='edit' onclick="navigateTo('edit')">Location erfassen</a>
+        <a class="nav-link" href="#" data-destination='edit' onclick="navigateTo('edit')">Location erfassen</a>
         <a class="nav-link" href="#" data-destination='friends' onclick="navigateTo('friends')">Freunde</a>
-        <a class="nav-link" href="#" data-destination='logout' onclick="logout()">Abmelden</a>
+        <a class="nav-link" href="#" data-destination='login' onclick="navigateTo('login')">Login</a>
+        <a class="nav-link" href="#" data-destination='logout' onclick="logout(sessionStorage.getItem('username'), sessionStorage.getItem('sessionID'))">Abmelden</a>
       </div>
     </div>
   </div>
