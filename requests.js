@@ -27,11 +27,12 @@ function register(event, form) {
         dataType: 'json',
         contentType: 'application/json',
         success: function(response) {
-
+            showToast('Registrieren', `Herzlichen Willkommen ${formData.get('inputName')} ${formData.get('inputSurname')}`)
         },
         error: function(xhr, status, error) {
             // Handle error response
             console.log(xhr.responseText);
+            showToast('Registrieren', 'Registrierung fehlgeschlagen!')
         }
     });
 }
@@ -57,12 +58,15 @@ function login(event, form) {
         success: function(response) {
             sessionStorage.setItem('username', body.loginName)
             sessionStorage.setItem('sessionID', response.sessionID)
-            },
+            showToast('Login', 'Du Bist Jetzt Eingeloggt!')
+        },
         error: function(xhr, status, error) {
             // Handle error response
             console.log(xhr.responseText);
+            showToast('Login', xhr.responseText);
         }
     });
+
 }
 
 function logout(loginName, sitzung) {
@@ -82,10 +86,12 @@ function logout(loginName, sitzung) {
         success: function(response) {
             sessionStorage.removeItem('username')
             sessionStorage.removeItem('sessionID')
-            },
+            showToast('Abmelden', 'Du bist abgelmeldet!')
+        },
         error: function(xhr, status, error) {
             // Handle error response
             console.log(xhr.responseText);
+            showToast('Abmelden', xhr.responseText);
         }
     });
 }
@@ -132,10 +138,12 @@ function setLocation(loginName, sitzung, breitengrad, laengengrad){
         dataType: 'json',
         contentType: 'application/json',
         success: function(response) {
+            showToast('Standort erfassen', 'Dein neuer Standort wurde erfolgreich erfasst!');
         },
         error: function(xhr, status, error) {
             // Handle error response
             console.log(xhr.responseText);
+            showToast('Standort erfassen', xhr.responseText);
         }
     });
 }
