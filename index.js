@@ -2,7 +2,15 @@ let sessionID;
 
 navigateTo();
 
-function navigateTo(pageName='register') {
+function navigateTo(pageName) {
+    if (pageName === undefined){
+        if (checkForLoggedIn()) {
+            pageName = 'friends'
+        } else {
+            pageName = 'login'
+        }
+    }
+
     let includes = $('[data-include]');
     $.each(includes, function () {
         if($(this).data('include') !== 'navbar'){
@@ -13,6 +21,7 @@ function navigateTo(pageName='register') {
         }
     });
     $(this).addClass('active');
+    $('div[data-include=' + pageName + ']').load('views/' + pageName + '.html');
 }
 
 function reloadMap(map, street, houseNumber, city, country){
@@ -42,4 +51,15 @@ function fillDropdownCountries(data, id) {
     }
 
     select.val('Germany')
+}
+
+function checkForLoggedIn(){
+    var sessionID = sessionStorage.getItem('sessionID')
+    var username = sessionStorage.getItem('username')
+
+    if (sessionID === null || username === null){
+        return false;
+    }
+
+    return true;
 }

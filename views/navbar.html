@@ -1,17 +1,30 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Friends & Locations</a>
+    <a class="navbar-brand" href="#" onclick="if (checkForLoggedIn()) {navigateTo('friends')} else {navigateTo('login')}">Friends & Locations</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="#" data-destination='register' onclick="navigateTo('register')">Registrieren</a>
-        <a class="nav-link" href="#" data-destination='edit' onclick="navigateTo('edit')">Location erfassen</a>
-        <a class="nav-link" href="#" data-destination='friends' onclick="navigateTo('friends')">Freunde</a>
-        <a class="nav-link" href="#" data-destination='login' onclick="navigateTo('login')">Login</a>
-        <a class="nav-link" href="#" data-destination='logout' onclick="logout(sessionStorage.getItem('username'), sessionStorage.getItem('sessionID'))">Abmelden</a>
+        <a id="edit" class="nav-link" href="#" data-destination='edit' onclick="navigateTo('edit')">Location erfassen</a>
+        <a id="friends" class="nav-link" href="#" data-destination='friends' onclick="navigateTo('friends')">Freunde</a>
+        <a id="logout" class="nav-link" href="#" data-destination='logout' onclick="logout(sessionStorage.getItem('username'), sessionStorage.getItem('sessionID'))">Abmelden</a>
       </div>
     </div>
   </div>
 </nav>
+
+<script>
+  $(document).ready(function() {
+
+    if (!checkForLoggedIn()) {
+      $('#edit').hide();
+      $('#friends').hide();
+      $('#logout').hide();
+    } else {
+      $('#edit').show();
+      $('#friends').show();
+      $('#logout').show();
+    }
+  });
+</script>

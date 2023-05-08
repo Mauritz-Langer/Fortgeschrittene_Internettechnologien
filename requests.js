@@ -28,6 +28,7 @@ function register(event, form) {
         contentType: 'application/json',
         success: function(response) {
             showToast('Registrieren', `Herzlichen Willkommen ${formData.get('inputName')} ${formData.get('inputSurname')}`)
+            navigateTo('login')
         },
         error: function(xhr, status, error) {
             // Handle error response
@@ -58,7 +59,9 @@ function login(event, form) {
         success: function(response) {
             sessionStorage.setItem('username', body.loginName)
             sessionStorage.setItem('sessionID', response.sessionID)
-            showToast('Login', 'Du Bist Jetzt Eingeloggt!')
+            showToast('Login', 'Du bist jetzt eingeloggt!')
+            navigateTo('edit')
+            $('div[data-include="navbar"]').load('views/navbar.html');
         },
         error: function(xhr, status, error) {
             // Handle error response
@@ -87,6 +90,8 @@ function logout(loginName, sitzung) {
             sessionStorage.removeItem('username')
             sessionStorage.removeItem('sessionID')
             showToast('Abmelden', 'Du bist abgelmeldet!')
+            navigateTo('login')
+            $('div[data-include="navbar"]').load('views/navbar.html');
         },
         error: function(xhr, status, error) {
             // Handle error response
@@ -199,7 +204,26 @@ function getCityFromPostalCode(postalCode, id, iframe){
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error('Error:', textStatus, errorThrown);
-            return ''
         }
     });
+}
+
+function checkLoginName(loginName){
+    var userExists = false
+    $.ajax({
+        url: 'https://fapfa.azurewebsites.net/FAPServer/service/fapservice/checkLoginName',
+        type: 'GET',
+        data: {
+            id: loginName
+        },
+        async: false,
+        dataType: 'json',
+        success: function(data) {
+            userExists = data.ergebnis
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error:', textStatus, errorThrown);
+        }
+    });
+    return userExists
 }

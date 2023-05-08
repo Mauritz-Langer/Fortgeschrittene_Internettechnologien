@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-    <form id="login" class="mt-4 shadow-lg p-4 mb-5 bg-body-tertiary rounded-4">
+    <form id="loginForm" class="mt-4 shadow-lg p-4 mb-5 bg-body-tertiary rounded-4">
         <h3>Login</h3>
         <div class="mb-3">
             <label for="inputUsername" class="form-label">Username</label>
@@ -19,10 +19,10 @@
 
 <script>
     $(document).ready(function() {
-        $('#login').submit(function(event) {
+        $('#loginForm').submit(function(event) {
             event.preventDefault(); // Prevent default form submission
 
-            const form = document.getElementById('login');
+            const form = document.getElementById('loginForm');
 
             login(event, form);
 
