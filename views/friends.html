@@ -53,9 +53,9 @@
             event.preventDefault(); // Prevent default form submission
 
             const form = document.getElementById('addUser');
-            var formData = new FormData(form);
+            const formData = new FormData(form);
 
-            var storedUsers = [];
+            let storedUsers = [];
 
             if (sessionStorage.getItem("storedUsers") === null){
                 storedUsers.push(JSON.parse(formData.get('inputUsernameFriends')))
@@ -72,28 +72,28 @@
 
     function fillDropdown(data) {
 
-        var benutzer = data.benutzerliste
+        const benutzer = data.benutzerliste;
 
-        var select = $('#inputUsernameFriends');
+        const select = $('#inputUsernameFriends');
 
         select.empty();
 
-        for (var i = 0; i < benutzer.length; i++) {
+        for (let i = 0; i < benutzer.length; i++) {
             $('<option>').val(JSON.stringify(benutzer[i])).text(benutzer[i].vorname + ' ' + benutzer[i].nachname).appendTo(select);
         }
     }
 
     function fillTable(users){
 
-        var table = $('#storedUsers');
-        var tbody = table.find('tbody');
+        const table = $('#storedUsers');
+        const tbody = table.find('tbody');
         tbody.empty()
 
-        for (var i = 0; i < users.length; i++) {
-            var row = $('<tr>');
+        for (let i = 0; i < users.length; i++) {
+            const row = $('<tr>');
             $('<th scope="row">').text(i+1).appendTo(row);
             $('<td>').text(users[i].vorname + ' ' + users[i].nachname).appendTo(row);
-            var button = $('<button>');
+            const button = $('<button>');
             button.attr('type', 'button')
             button.attr('aria-label', 'Close')
             button.attr('class', 'btn-close')
@@ -104,7 +104,7 @@
     }
 
     function deleteFromTable(user){
-        var users = JSON.parse(sessionStorage.getItem("storedUsers"))
+        let users = JSON.parse(sessionStorage.getItem("storedUsers"));
 
         users = users.filter(function (obj) {
             return JSON.stringify(obj) !== JSON.stringify(user)

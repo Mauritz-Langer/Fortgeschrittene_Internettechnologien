@@ -1,8 +1,8 @@
 function register(event, form) {
     event.preventDefault(); // Prevent default form submission
     // Get the form data
-    var formData = new FormData(form);
-    var body = {
+    let formData = new FormData(form);
+    let body = {
         loginName: formData.get('inputUsername'),
         passwort: {
             passwort: formData.get('inputPassword')
@@ -17,7 +17,7 @@ function register(event, form) {
         email: {
             adresse: formData.get('inputEmail')
         }
-    }
+    };
 
     // Make the AJAX POST request
     $.ajax({
@@ -26,13 +26,11 @@ function register(event, form) {
         data: JSON.stringify(body),
         dataType: 'json',
         contentType: 'application/json',
-        success: function(response) {
+        success: function() {
             showToast('Registrieren', `Herzlichen Willkommen ${formData.get('inputName')} ${formData.get('inputSurname')}`)
             navigateTo('login')
         },
-        error: function(xhr, status, error) {
-            // Handle error response
-            console.log(xhr.responseText);
+        error: function() {
             showToast('Registrieren', 'Registrierung fehlgeschlagen!')
         }
     });
@@ -41,13 +39,13 @@ function register(event, form) {
 function login(event, form) {
     event.preventDefault(); // Prevent default form submission
     // Get the form data
-    var formData = new FormData(form);
-    var body = {
+    let formData = new FormData(form);
+    let body = {
         loginName: formData.get('inputUsername'),
         passwort: {
             passwort: formData.get('inputPassword')
         }
-    }
+    };
 
     // Make the AJAX POST request
     $.ajax({
@@ -63,9 +61,7 @@ function login(event, form) {
             navigateTo('edit')
             $('div[data-include="navbar"]').load('views/navbar.html');
         },
-        error: function(xhr, status, error) {
-            // Handle error response
-            console.log(xhr.responseText);
+        error: function(xhr) {
             showToast('Login', xhr.responseText);
         }
     });
@@ -86,16 +82,14 @@ function logout(loginName, sitzung) {
         data: JSON.stringify(body),
         dataType: 'json',
         contentType: 'application/json',
-        success: function(response) {
+        success: function() {
             sessionStorage.removeItem('username')
             sessionStorage.removeItem('sessionID')
             showToast('Abmelden', 'Du bist abgelmeldet!')
             navigateTo('login')
             $('div[data-include="navbar"]').load('views/navbar.html');
         },
-        error: function(xhr, status, error) {
-            // Handle error response
-            console.log(xhr.responseText);
+        error: function(xhr) {
             showToast('Abmelden', xhr.responseText);
         }
     });
@@ -105,7 +99,7 @@ function getStandortByAdress(event, form){
 
     event.preventDefault(); // Prevent default form submission
     // Get the form data
-    var formData = new FormData(form);
+    const formData = new FormData(form);
 
     $.ajax({
         url: 'https://fapfa.azurewebsites.net/FAPServer/service/fapservice/getStandortPerAdresse',
@@ -119,8 +113,7 @@ function getStandortByAdress(event, form){
         success: function(data) {
             setLocation(sessionStorage.getItem('username'), sessionStorage.getItem('sessionID'), data.breitengrad, data.laengengrad)
         },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
+        error: function() {
         }
     });
 }
@@ -142,12 +135,10 @@ function setLocation(loginName, sitzung, breitengrad, laengengrad){
         data: JSON.stringify(body),
         dataType: 'json',
         contentType: 'application/json',
-        success: function(response) {
+        success: function() {
             showToast('Standort erfassen', 'Dein neuer Standort wurde erfolgreich erfasst!');
         },
-        error: function(xhr, status, error) {
-            // Handle error response
-            console.log(xhr.responseText);
+        error: function(xhr) {
             showToast('Standort erfassen', xhr.responseText);
         }
     });
@@ -166,9 +157,7 @@ function getUsers(loginName, sitzung){
             fillDropdown(data)
             fillTable(JSON.parse(sessionStorage.getItem('storedUsers')))
         },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
-        }
+        error: function() {}
     });
 }
 
@@ -183,9 +172,7 @@ function getAllCountries(id){
         success: function(data) {
             fillDropdownCountries(data, id)
         },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
-        }
+        error: function() {}
     });
 }
 
@@ -202,14 +189,12 @@ function getCityFromPostalCode(postalCode, id, iframe){
             $(id).val(city)
             reloadMap(iframe, street, houseNumber, city, country);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
-        }
+        error: function() {}
     });
 }
 
 function checkLoginName(loginName){
-    var userExists = false
+    let userExists = false;
     $.ajax({
         url: 'https://fapfa.azurewebsites.net/FAPServer/service/fapservice/checkLoginName',
         type: 'GET',
@@ -221,9 +206,7 @@ function checkLoginName(loginName){
         success: function(data) {
             userExists = data.ergebnis
         },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
-        }
+        error: function() {}
     });
     return userExists
 }

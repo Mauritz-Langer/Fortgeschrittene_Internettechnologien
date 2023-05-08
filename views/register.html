@@ -94,10 +94,10 @@
 
 <script>
 
-    var street = '';
-    var houseNumber = '';
-    var city = '';
-    var country = '';
+    let street = '';
+    let houseNumber = '';
+    let city = '';
+    let country = '';
 
     $(document).ready(function() {
         getAllCountries('#inputStateRegister')
@@ -111,35 +111,35 @@
         });
 
         $('#inputStreetRegister').change(function() {
-            var iframe = $('#registerMap');
+            const iframe = $('#registerMap');
             street = $(this).val();
 
             reloadMap(iframe, street, houseNumber, city, country);
         });
 
         $('#inputHouseNumberRegister').change(function() {
-            var iframe = $('#registerMap');
+            const iframe = $('#registerMap');
             houseNumber = $(this).val();
 
             reloadMap(iframe, street, houseNumber, city, country);
         });
 
         $('#inputCityRegister').change(function() {
-            var iframe = $('#registerMap');
+            const iframe = $('#registerMap');
             city = $(this).val();
 
             reloadMap(iframe, street, houseNumber, city, country);
         });
 
         $('#inputStateRegister').change(function() {
-            var iframe = $('#registerMap');
+            const iframe = $('#registerMap');
             country = $(this).val();
 
             reloadMap(iframe, street, houseNumber, city, country);
         });
 
         $('#inputZipRegister').change(function() {
-            var iframe = $('#registerMap');
+            const iframe = $('#registerMap');
             getCityFromPostalCode($(this).val(), '#inputCityRegister', iframe)
 
         });

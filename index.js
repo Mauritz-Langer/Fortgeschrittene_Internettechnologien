@@ -26,7 +26,7 @@ function navigateTo(pageName) {
 
 function reloadMap(map, street, houseNumber, city, country){
     street = street.replace(/\s+/g, '+')
-    var src = 'https://www.google.com/maps/embed/v1/place?q='+ street +'+'+ houseNumber +',+'+ city +',+'+ country +'&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'
+    const src = 'https://www.google.com/maps/embed/v1/place?q=' + street + '+' + houseNumber + ',+' + city + ',+' + country + '&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8';
 // set the new src attribute
     map.attr('src', src);
 
@@ -42,11 +42,11 @@ function logout(){
 
 function fillDropdownCountries(data, id) {
 
-    var select = $(id);
+    const select = $(id);
 
     select.empty();
 
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         $('<option>').val(data[i].name.common).text(data[i].name.common).appendTo(select);
     }
 
@@ -54,12 +54,8 @@ function fillDropdownCountries(data, id) {
 }
 
 function checkForLoggedIn(){
-    var sessionID = sessionStorage.getItem('sessionID')
-    var username = sessionStorage.getItem('username')
+    let sessionID = sessionStorage.getItem('sessionID');
+    let username = sessionStorage.getItem('username');
 
-    if (sessionID === null || username === null){
-        return false;
-    }
-
-    return true;
+    return !(sessionID === null || username === null);
 }

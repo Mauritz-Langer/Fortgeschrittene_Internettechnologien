@@ -7,9 +7,9 @@
     <script src="https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js"></script>
     <script>
         $(function () {
-            var includes = $('[data-include]')
+            let includes = $('[data-include]');
             $.each(includes, function () {
-                var file = 'views/' + $(this).data('include') + '.html'
+                let file = 'views/' + $(this).data('include') + '.html';
                 $(this).load(file)
             })
         })
