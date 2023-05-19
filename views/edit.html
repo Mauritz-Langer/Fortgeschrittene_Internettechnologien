@@ -1,8 +1,16 @@
+<script src="../editvalidation.js"></script>
+<script !src="">
+        getAllCountries('#inputState')
+        $('#inputUsernameEdit').val(sessionStorage.getItem('username')).prop('disabled', true)
+        $('#inputZip').change(function() {
+            const iframe = $('#editMap')
+            getCityFromPostalCode($(this).val(), '#inputCity', iframe)
+        });
+</script>
+
 <div class="position-relative m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded-4">
 <form id="setLocation" class="row g-3 m-4">
         <h3>Standort erfassen</h3>
-
-
     <div class="col-md-6">
         <div class="row g-3">
             <div class="col-md-12">
@@ -12,21 +20,29 @@
 
             <div class="col-12">
                 <label for="inputStreet" class="form-label">Straße</label>
-                <input type="text" class="form-control" id="inputStreet" name="inputStreet">
+                <input type="text" class="form-control" id="inputStreet" name="street" required>
+                <div class="invalid-feedback"></div>
+                <div class="valid-feedback">Es sieht gut aus!</div>
             </div>
 
             <div class="col-12">
                 <label for="inputHouseNumber" class="form-label">Hausnummer</label>
-                <input type="text" class="form-control" id="inputHouseNumber" name="inputHouseNumber">
+                <input type="text" class="form-control" id="inputHouseNumber" name="housenumber" required>
+                <div class="invalid-feedback"></div>
+                <div class="valid-feedback">Es sieht gut aus!</div>
             </div>
 
             <div class="col-md-12">
                 <label for="inputZip" class="form-label">PLZ</label>
-                <input type="text" class="form-control" id="inputZip" name="inputZip">
+                <input type="text" class="form-control" id="inputZip" name="zip" required>
+                <div class="invalid-feedback"></div>
+                <div class="valid-feedback">Es sieht gut aus!</div>
             </div>
             <div class="col-md-12">
                 <label for="inputCity" class="form-label">Ort</label>
-                <input type="text" class="form-control" id="inputCity" name="inputCity">
+                <input type="text" class="form-control" id="inputCity" name="city" required>
+                <div class="invalid-feedback"></div>
+                <div class="valid-feedback">Es sieht gut aus!</div>
             </div>
             <div class="col-md-12">
                 <label for="inputState" class="form-label">Land</label>
@@ -50,59 +66,3 @@
 
     </form>
 </div>
-
-<script>
-    let street = '';
-    let houseNumber = '';
-    let city = '';
-    let country = '';
-
-    $(document).ready(function() {
-        getAllCountries('#inputState')
-
-        $('#inputUsernameEdit').val(sessionStorage.getItem('username')).prop('disabled', true)
-    });
-
-    $('#inputStreet').change(function() {
-        let iframe = $('#editMap');
-        street = $(this).val();
-
-        reloadMap(iframe, street, houseNumber, city, country);
-    });
-
-    $('#inputHouseNumber').change(function() {
-        let iframe = $('#editMap');
-        houseNumber = $(this).val();
-
-        reloadMap(iframe, street, houseNumber, city, country);
-    });
-
-    $('#inputCity').change(function() {
-        const iframe = $('#editMap');
-        city = $(this).val();
-
-        reloadMap(iframe, street, houseNumber, city, country);
-    });
-
-    $('#inputState').change(function() {
-        const iframe = $('#editMap');
-        country = $(this).val();
-
-        reloadMap(iframe, street, houseNumber, city, country);
-    });
-
-    $('#inputZip').change(function() {
-        const iframe = $('#editMap')
-        getCityFromPostalCode($(this).val(), '#inputCity', iframe)
-    });
-
-    $(document).ready(function() {
-        $('#setLocation').submit(function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            const form = document.getElementById('setLocation');
-
-            getStandortByAdress(event, form)
-        });
-    });
-</script>

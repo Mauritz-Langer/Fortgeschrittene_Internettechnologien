@@ -31,9 +31,8 @@
 
     <div class="col-md-6">
         <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
-            <div style="height:475px; width:100%;">
-                <iframe style="height:100%;width:100%;border-radius: 18px;"
-                        src="https://www.google.com/maps/embed/v1/place?q=Lange+Straße+7,+Hamm,+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+            <div style="height:475px; width:100%;border-radius: 18px;">
+                <div id="map" style="height: 100%;border-radius: 18px;"></div>
             </div>
         </div>
     </div>
@@ -56,17 +55,25 @@
             const formData = new FormData(form);
 
             let storedUsers = [];
-
-            if (sessionStorage.getItem("storedUsers") === null){
-                storedUsers.push(JSON.parse(formData.get('inputUsernameFriends')))
-            } else {
-                storedUsers = JSON.parse(sessionStorage.getItem("storedUsers"))
-                if (!storedUsers.find(e => JSON.stringify(e) ===  formData.get('inputUsernameFriends'))){
-                    storedUsers.push(JSON.parse(formData.get('inputUsernameFriends')))
+            function callback(username){
+                if (sessionStorage.getItem("storedUsers") === null){
+                    storedUsers.push(username)
+                } else {
+                    storedUsers = JSON.parse(sessionStorage.getItem("storedUsers"))
+                    if (!storedUsers.find(e => JSON.stringify(e) ===  username)){
+                        storedUsers.push(username)
+                    }
                 }
+                sessionStorage.setItem("storedUsers", JSON.stringify(storedUsers))
+                fillTable(storedUsers)
+                updateMap(storedUsers);
+
             }
-            sessionStorage.setItem("storedUsers", JSON.stringify(storedUsers))
-            fillTable(storedUsers)
+
+
+            getLocationByUsername(JSON.parse(formData.get('inputUsernameFriends')),callback);
+
+
         });
     });
 
@@ -82,6 +89,7 @@
             $('<option>').val(JSON.stringify(benutzer[i])).text(benutzer[i].vorname + ' ' + benutzer[i].nachname).appendTo(select);
         }
     }
+
 
     function fillTable(users){
 

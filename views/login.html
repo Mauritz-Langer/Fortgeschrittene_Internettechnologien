@@ -3,11 +3,15 @@
         <h3>Login</h3>
         <div class="mb-3">
             <label for="inputUsername" class="form-label">Username</label>
-            <input type="text" class="form-control" id="inputUsername" name="inputUsername">
+            <input type="text" class="form-control" id="inputUsername" name="username" required>
+            <div class="invalid-feedback"></div>
+            <div class="valid-feedback">Es sieht gut aus!</div>
         </div>
         <div class="mb-3">
             <label for="inputPassword" class="form-label">Passwort</label>
-            <input type="password" class="form-control" id="inputPassword" name="inputPassword">
+            <input type="password" class="form-control" id="inputPassword" name="password" required>
+            <div class="invalid-feedback"></div>
+            <div class="valid-feedback">Es sieht gut aus!</div>
         </div>
         <div class="mb-3">
             <button onclick="navigateTo('register')" type="button" class="btn btn-link">Du hast noch keinen Account? </button>
@@ -16,16 +20,4 @@
         <button type="submit" class="btn btn-primary">Log in</button>
     </form>
 </div>
-
-<script>
-    $(document).ready(function() {
-        $('#loginForm').submit(function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            const form = document.getElementById('loginForm');
-
-            login(event, form);
-
-        });
-    });
-</script>
+<script src="../loginvalidation.js"></script>

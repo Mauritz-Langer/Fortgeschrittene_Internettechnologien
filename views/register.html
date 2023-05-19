@@ -1,149 +1,138 @@
+<script src="../registerformvalidation.js"></script>
+<script src="../securityutils.js"></script>
+<script !src="">
+    var question = generateAdditionQuestion();
 
-    <div class="position-relative m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded-4">
+    $('#securityquestionlabel').text(question.question);
+    $('#securityquestionlabel').attr('data-answer',question.answer);
+    getAllCountries('#inputStateRegister');
 
-        <form id="register" class="position-relative row g-3 m-4 z-1 needs-validation" novalidate>
-            <h3>Registrieren</h3>
-            <div class="col-md-6">
-                <label for="inputNameRegister" class="form-label">Vorname</label>
-                <input type="text" class="form-control" id="inputNameRegister" name="inputName">
-            </div>
-            <div class="col-md-6">
-                <label for="inputSurnameRegister" class="form-label">Nachname</label>
-                <input type="text" class="form-control" id="inputSurnameRegister" name="inputSurname">
-            </div>
-
-            <div class="col-md-12">
-                <label for="inputUsernameRegister" class="form-label">Gewünschter Benutzername</label>
-                <div class="input-group has-validation">
-                    <span class="input-group-text" id="inputGroupPrepend">@</span>
-                    <input type="text" class="form-control" id="inputUsernameRegister" name="inputUsername" aria-describedby="inputGroupPrepend" required>
-                    <div class="invalid-feedback">
-                        Please choose a username.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <label for="inputEmailRegister" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmailRegister" name="inputEmail">
-            </div>
-
-            <div class="col-md-6">
-                <label for="inputPasswordRegister" class="form-label">Passwort</label>
-                <input type="password" class="form-control" id="inputPasswordRegister" name="inputPassword">
-            </div>
-
-            <div class="col-md-6">
-                <div class="row g-3">
-                    <div class="col-md-12">
-                        <label for="inputStreetRegister" class="form-label">Straße</label>
-                        <input type="text" class="form-control" id="inputStreetRegister" name="inputStreet">
-                    </div>
-
-                    <div class="col-md-12">
-                        <label for="inputHouseNumberRegister" class="form-label">Hausnummer</label>
-                        <input type="text" class="form-control" id="inputHouseNumberRegister" name="inputHouseNumber">
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="inputZipRegister" class="form-label">PLZ</label>
-                                <input type="text" class="form-control" id="inputZipRegister" name="inputZip">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputCityRegister" class="form-label">Ort</label>
-                                <input type="text" class="form-control" id="inputCityRegister" name="inputCity">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <label for="inputStateRegister" class="form-label">Land</label>
-                        <select id="inputStateRegister" name="inputState" class="form-select">
-                        </select>
-                    </div>
-
-                    <div class="col-md-12">
-                        <label for="inputPhoneRegister" class="form-label">Telefon</label>
-                        <input type="text" class="form-control" id="inputPhoneRegister" name="inputPhone">
-                    </div>
-
-                    <div class="col-md-12">
-                        <label for="inputSecurityQuestionRegister" class="form-label">Lösen Sie 8 + 1 =</label>
-                        <input type="text" class="form-control" id="inputSecurityQuestionRegister" name="inputSecurityQuestion">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
-                        <div style="height:475px; width:100%;">
-                            <iframe id="registerMap" style="height:100%;width:100%;border-radius: 18px;"
-                                    src="https://www.google.com/maps/embed/v1/place?q=+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
-                        </div>
-                </div>
-            </div>
-
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Registrieren</button>
-            </div>
-
-        </form>
-    </div>
-
-<script>
-
-    let street = '';
-    let houseNumber = '';
-    let city = '';
-    let country = '';
-
-    $(document).ready(function() {
-        getAllCountries('#inputStateRegister')
-
-        $('#register').submit(function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            const form = document.getElementById('register');
-
-            register(event, form);
-        });
-
-        $('#inputStreetRegister').change(function() {
-            const iframe = $('#registerMap');
-            street = $(this).val();
-
-            reloadMap(iframe, street, houseNumber, city, country);
-        });
-
-        $('#inputHouseNumberRegister').change(function() {
-            const iframe = $('#registerMap');
-            houseNumber = $(this).val();
-
-            reloadMap(iframe, street, houseNumber, city, country);
-        });
-
-        $('#inputCityRegister').change(function() {
-            const iframe = $('#registerMap');
-            city = $(this).val();
-
-            reloadMap(iframe, street, houseNumber, city, country);
-        });
-
-        $('#inputStateRegister').change(function() {
-            const iframe = $('#registerMap');
-            country = $(this).val();
-
-            reloadMap(iframe, street, houseNumber, city, country);
-        });
-
-        $('#inputZipRegister').change(function() {
-            const iframe = $('#registerMap');
-            getCityFromPostalCode($(this).val(), '#inputCityRegister', iframe)
-
-        });
+    $('#inputZipRegister').change(function () {
+        const iframe = $('#registerMap');
+        getCityFromPostalCode($(this).val(), '#inputCityRegister', iframe)
     });
 
-
 </script>
+
+<div class="position-relative m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded-4">
+
+    <form id="register" class="position-relative row g-3 m-4 z-1 needs-validation" novalidate>
+        <h3>Registrieren</h3>
+<!--        <div class="form-group">-->
+<!--            <label for="inputName">Name</label>-->
+<!--            <input type="text" class="form-control" id="inputName" name="inputName" required>-->
+<!--            <div class="invalid-feedback">Please enter your name.</div>-->
+<!--        </div>-->
+
+        <div class="col-md-6">
+            <label for="inputNameRegister" class="form-label">Vorname</label>
+            <input type="text" class="form-control" id="inputNameRegister" name="firstname" required>
+            <div class="invalid-feedback"></div>
+            <div class="valid-feedback">Es sieht gut aus!</div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputSurnameRegister" class="form-label">Nachname</label>
+            <input type="text" class="form-control" id="inputSurnameRegister" name="surname" required>
+            <div class="invalid-feedback"></div>
+            <div class="valid-feedback">Es sieht gut aus!</div>        </div>
+
+        <div class="col-md-12">
+            <label for="inputUsernameRegister" class="form-label">Gewünschter Benutzername</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                <input type="text" class="form-control" id="inputUsernameRegister" name="username"
+                       aria-describedby="inputGroupPrepend" required>
+                <div class="invalid-feedback"></div>
+                <div class="valid-feedback">Es sieht gut aus!</div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputEmailRegister" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputEmailRegister" name="email" required>
+            <div class="invalid-feedback"></div>
+            <div class="valid-feedback">Es sieht gut aus!</div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputPasswordRegister" class="form-label">Passwort</label>
+            <input type="password" class="form-control" id="inputPasswordRegister" name="password" required>
+            <div class="invalid-feedback"></div>
+            <div class="valid-feedback">Es sieht gut aus!</div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <label for="inputStreetRegister" class="form-label">Straße</label>
+                    <input type="text" class="form-control" id="inputStreetRegister" name="street" required>
+                    <div class="invalid-feedback"></div>
+                    <div class="valid-feedback">Es sieht gut aus!</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="inputHouseNumberRegister" class="form-label">Hausnummer</label>
+                    <input type="text" class="form-control" id="inputHouseNumberRegister" name="housenumber" required>
+                    <div class="invalid-feedback"></div>
+                    <div class="valid-feedback">Es sieht gut aus!</div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="inputZipRegister" class="form-label">PLZ</label>
+                            <input type="number" class="form-control" id="inputZipRegister" name="zip" required>
+                            <div class="invalid-feedback"></div>
+                            <div class="valid-feedback">Es sieht gut aus!</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputCityRegister" class="form-label">Ort</label>
+                            <input type="text" class="form-control" id="inputCityRegister" name="city" required>
+                            <div class="invalid-feedback"></div>
+                            <div class="valid-feedback">Es sieht gut aus!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="inputStateRegister" class="form-label">Land</label>
+                    <select id="inputStateRegister" name="inputState" class="form-select">
+                    </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="inputPhoneRegister" class="form-label">Telefon</label>
+                    <input type="number" class="form-control" id="inputPhoneRegister" name="phonenumber" required>
+                    <div class="invalid-feedback"></div>
+                    <div class="valid-feedback">Es sieht gut aus!</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label data-answer="" id="securityquestionlabel" for="inputSecurityQuestionRegister" class="form-label"></label>
+                    <input type="number" class="form-control" id="inputSecurityQuestionRegister"
+                           name="securityquestion" required>
+                    <div class="invalid-feedback"></div>
+                    <div class="valid-feedback">Es sieht gut aus!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
+                <div style="height:475px; width:100%;">
+                    <iframe id="registerMap" style="height:100%;width:100%;border-radius: 18px;"
+                            src="https://www.google.com/maps/embed/v1/place?q=+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Registrieren</button>
+        </div>
+
+    </form>
+
+</div>
+
+

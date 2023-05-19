@@ -1,23 +1,25 @@
-function register(event, form) {
-    event.preventDefault(); // Prevent default form submission
+function registerUser(form) {
+    //event.preventDefault(); // Prevent default form submission
     // Get the form data
     let formData = new FormData(form);
     let body = {
-        loginName: formData.get('inputUsername'),
+        loginName: formData.get('username'),
         passwort: {
-            passwort: formData.get('inputPassword')
+            passwort: formData.get('password')
         },
-        vorname: formData.get('inputName'),
-        nachname: formData.get('inputSurname'),
-        strasse: formData.get('inputStreet') + ' ' + formData.get('inputHouseNumber'),
-        plz: formData.get('inputZip'),
-        ort: formData.get('inputCity'),
-        land: formData.get('inputState'),
-        telefon: formData.get('inputPhone'),
+        vorname: formData.get('firstname'),
+        nachname: formData.get('surname'),
+        strasse: formData.get('street') + ' ' + formData.get('housenumber'),
+        plz: formData.get('zip'),
+        ort: formData.get('city'),
+        land: formData.get('inputStateRegister'),
+        telefon: formData.get('phonenumber'),
         email: {
-            adresse: formData.get('inputEmail')
+            adresse: formData.get('email')
         }
     };
+
+    console.log(body);
 
     // Make the AJAX POST request
     $.ajax({
@@ -27,7 +29,7 @@ function register(event, form) {
         dataType: 'json',
         contentType: 'application/json',
         success: function() {
-            showToast('Registrieren', `Herzlichen Willkommen ${formData.get('inputName')} ${formData.get('inputSurname')}`)
+            showToast('Registrieren', `Herzlichen Willkommen ${formData.get('firstname')} ${formData.get('surname')}`)
             navigateTo('login')
         },
         error: function() {
@@ -36,16 +38,17 @@ function register(event, form) {
     });
 }
 
-function login(event, form) {
-    event.preventDefault(); // Prevent default form submission
+function login(form) {
     // Get the form data
     let formData = new FormData(form);
     let body = {
-        loginName: formData.get('inputUsername'),
+        loginName: formData.get('username'),
         passwort: {
-            passwort: formData.get('inputPassword')
+            passwort: formData.get('password')
         }
     };
+
+    console.log(body);
 
     // Make the AJAX POST request
     $.ajax({
@@ -95,9 +98,7 @@ function logout(loginName, sitzung) {
     });
 }
 
-function getStandortByAdress(event, form){
-
-    event.preventDefault(); // Prevent default form submission
+function getStandortByAdress( form){
     // Get the form data
     const formData = new FormData(form);
 
@@ -106,9 +107,9 @@ function getStandortByAdress(event, form){
         type: 'GET',
         data: {
             land: formData.get('inputState'),
-            plz: formData.get('inputZip'),
-            ort: formData.get('inputCity'),
-            strasse: formData.get('inputStreet') + ' ' + formData.get('inputHouseNumber')
+            plz: formData.get('zip'),
+            ort: formData.get('city'),
+            strasse: formData.get('street') + ' ' + formData.get('housenumber')
         },
         success: function(data) {
             setLocation(sessionStorage.getItem('username'), sessionStorage.getItem('sessionID'), data.breitengrad, data.laengengrad)
@@ -187,26 +188,32 @@ function getCityFromPostalCode(postalCode, id, iframe){
         success: function(data) {
             city = data.name
             $(id).val(city)
-            reloadMap(iframe, street, houseNumber, city, country);
+            reloadMap(iframe);
         },
         error: function() {}
     });
 }
 
-function checkLoginName(loginName){
-    let userExists = false;
-    $.ajax({
-        url: 'https://fapfa.azurewebsites.net/FAPServer/service/fapservice/checkLoginName',
-        type: 'GET',
-        data: {
-            id: loginName
-        },
-        async: false,
-        dataType: 'json',
-        success: function(data) {
-            userExists = data.ergebnis
-        },
-        error: function() {}
-    });
-    return userExists
+function getLocationByUsername(username, callback){
+    console.log(username.loginName);
+    let session = sessionStorage.getItem('sessionID');
+    let id = sessionStorage.getItem('username');
+    //console.log(id + session + username);
+        $.ajax({
+            url: 'https://fapfa.azurewebsites.net/FAPServer/service/fapservice/getStandort',
+            type: 'GET',
+            data: {
+                login:id,
+                id:username.loginName,
+                session:session
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                username.standort = data.standort;
+                console.log(username);
+                callback(username);
+            },
+            error: function() {}
+        });
 }
