@@ -56,11 +56,14 @@
 
             let storedUsers = [];
             function callback(username){
+                if (username.standort === undefined){
+                    showToast('Freund hinzufügen', username.vorname + ' ' + username.nachname +' hat leider keinen Standort geteilt');
+                }
                 if (sessionStorage.getItem("storedUsers") === null){
                     storedUsers.push(username)
                 } else {
                     storedUsers = JSON.parse(sessionStorage.getItem("storedUsers"))
-                    if (!storedUsers.find(e => JSON.stringify(e) ===  username)){
+                    if (!storedUsers.find(e => JSON.stringify(e) === JSON.stringify(username))){
                         storedUsers.push(username)
                     }
                 }
@@ -73,8 +76,8 @@
 
             getLocationByUsername(JSON.parse(formData.get('inputUsernameFriends')),callback);
 
-
         });
+        updateMap(JSON.parse(sessionStorage.getItem("storedUsers")))
     });
 
     function fillDropdown(data) {
@@ -120,5 +123,6 @@
 
         sessionStorage.setItem("storedUsers", JSON.stringify(users))
         fillTable(users)
+        updateMap(JSON.parse(sessionStorage.getItem("storedUsers")))
     }
 </script>
