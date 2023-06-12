@@ -1,128 +1,115 @@
 <div class="position-relative m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded-4">
-<form id="addUser" class="row g-3 m-4">
-
-        <h3>Wo befinden sich meine Freunde?</h3>
-    <div class="col-md-6">
-        <div class="row g-3">
-            <div class="col-md-12">
-                <label for="inputUsernameFriends" class="form-label">Benutzer</label>
-                <select id="inputUsernameFriends" name="inputUsernameFriends" class="form-select">
-                </select>
-            </div>
-            <div class="col-md-12">
-                <button type="submit" class="btn btn-primary">Hinzufügen</button>
-            </div>
-            <div class="col-md-12">
-                <table id="storedUsers" class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Benutzername</th>
-                        <th scope="col"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-md-6">
-        <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
-            <div style="height:475px; width:100%;border-radius: 18px;">
-                <div id="map" style="height: 100%;border-radius: 18px;"></div>
+    <form id="addUser" class="row g-3 m-4">
+        <h3>Wo befinden sich meine Freunde?</h3> <!-- Überschrift -->
+        <div class="col-md-6">
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <label for="inputUsernameFriends" class="form-label">Benutzer</label>
+                    <select id="inputUsernameFriends" name="inputUsernameFriends" class="form-select"></select> <!-- Dropdown-Feld für die Auswahl des Benutzers -->
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Hinzufügen</button> <!-- Hinzufügen-Button -->
+                </div>
+                <div class="col-md-12">
+                    <!-- Tabelle zur Anzeige der gespeicherten Benutzer -->
+                    <table id="storedUsers" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Benutzername</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
+
+        <div class="col-md-6">
+            <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
+                <div style="height:475px; width:100%;border-radius: 18px;">
+                    <div id="map" style="height: 100%;border-radius: 18px;"></div> <!-- Div-Container für die Karte -->
+                </div>
+            </div>
+        </div>
     </form>
-
-
-
 </div>
 
-
 <script>
-
     $(document).ready(function() {
-        getUsers(sessionStorage.getItem('username'), sessionStorage.getItem('sessionID'))
+        getUsers(sessionStorage.getItem('username'), sessionStorage.getItem('sessionID')) // Funktion aufrufen, um Benutzer abzurufen
 
         $('#addUser').submit(function(event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault(); // Standardformularabsendung verhindern
 
             const form = document.getElementById('addUser');
             const formData = new FormData(form);
 
             let storedUsers = [];
-            function callback(username){
-                if (username.standort === undefined){
-                    showToast('Freund hinzufügen', username.vorname + ' ' + username.nachname +' hat leider keinen Standort geteilt');
+            function callback(username) {
+                if (username.standort === undefined) {
+                    showToast('Freund hinzufügen', username.vorname + ' ' + username.nachname + ' hat leider keinen Standort geteilt'); // Toast-Nachricht anzeigen, wenn der ausgewählte Freund keinen Standort geteilt hat
                 }
-                if (sessionStorage.getItem("storedUsers") === null){
-                    storedUsers.push(username)
+                if (sessionStorage.getItem("storedUsers") === null) {
+                    storedUsers.push(username);
                 } else {
-                    storedUsers = JSON.parse(sessionStorage.getItem("storedUsers"))
-                    if (!storedUsers.find(e => JSON.stringify(e) === JSON.stringify(username))){
-                        storedUsers.push(username)
+                    storedUsers = JSON.parse(sessionStorage.getItem("storedUsers"));
+                    if (!storedUsers.find(e => JSON.stringify(e) === JSON.stringify(username))) {
+                        storedUsers.push(username);
                     }
                 }
-                sessionStorage.setItem("storedUsers", JSON.stringify(storedUsers))
-                fillTable(storedUsers)
+                sessionStorage.setItem("storedUsers", JSON.stringify(storedUsers));
+                fillTable(storedUsers);
                 updateMap(storedUsers);
-
             }
 
-
-            getLocationByUsername(JSON.parse(formData.get('inputUsernameFriends')),callback);
-
+            getLocationByUsername(JSON.parse(formData.get('inputUsernameFriends')), callback); // Funktion aufrufen, um den Standort des ausgewählten Benutzers zu erhalten
         });
-        updateMap(JSON.parse(sessionStorage.getItem("storedUsers")))
+
+        updateMap(JSON.parse(sessionStorage.getItem("storedUsers"))); // Karte mit den gespeicherten Benutzern aktualisieren
     });
 
     function fillDropdown(data) {
-
         const benutzer = data.benutzerliste;
-
         const select = $('#inputUsernameFriends');
 
         select.empty();
 
         for (let i = 0; i < benutzer.length; i++) {
-            $('<option>').val(JSON.stringify(benutzer[i])).text(benutzer[i].vorname + ' ' + benutzer[i].nachname).appendTo(select);
+            $('<option>').val(JSON.stringify(benutzer[i])).text(benutzer[i].vorname + ' ' + benutzer[i].nachname).appendTo(select); // Dropdown-Optionen mit den Benutzernamen füllen
         }
     }
 
-
-    function fillTable(users){
-
+    function fillTable(users) {
         const table = $('#storedUsers');
         const tbody = table.find('tbody');
-        tbody.empty()
+        tbody.empty();
 
         for (let i = 0; i < users.length; i++) {
             const row = $('<tr>');
-            $('<th scope="row">').text(i+1).appendTo(row);
+            $('<th scope="row">').text(i + 1).appendTo(row);
             $('<td>').text(users[i].vorname + ' ' + users[i].nachname).appendTo(row);
             const button = $('<button>');
-            button.attr('type', 'button')
-            button.attr('aria-label', 'Close')
-            button.attr('class', 'btn-close')
-            button.attr('onclick', 'deleteFromTable(' + JSON.stringify(users[i]) + ');')
-            $('<td>').append(button).appendTo(row);
+            button.attr('type', 'button');
+            button.attr('aria-label', 'Close');
+            button.attr('class', 'btn-close');
+            button.attr('onclick', 'deleteFromTable(' + JSON.stringify(users[i]) + ');');
+            $('<td>').append(button).appendTo(row); // Tabellenzeilen mit Benutzerinformationen und Löschen-Button erstellen
             tbody.append(row);
         }
     }
 
-    function deleteFromTable(user){
+    function deleteFromTable(user) {
         let users = JSON.parse(sessionStorage.getItem("storedUsers"));
 
-        users = users.filter(function (obj) {
-            return JSON.stringify(obj) !== JSON.stringify(user)
-        })
+        users = users.filter(function(obj) {
+            return JSON.stringify(obj) !== JSON.stringify(user);
+        }); // Benutzer aus der gespeicherten Benutzerliste entfernen
 
-        sessionStorage.setItem("storedUsers", JSON.stringify(users))
-        fillTable(users)
-        updateMap(JSON.parse(sessionStorage.getItem("storedUsers")))
+        sessionStorage.setItem("storedUsers", JSON.stringify(users));
+        fillTable(users);
+        updateMap(JSON.parse(sessionStorage.getItem("storedUsers"))); // Tabelle und Karte aktualisieren
     }
 </script>

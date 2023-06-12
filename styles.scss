@@ -1,50 +1,52 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 
+/* Importiert die Open Sans-Schriftart von Google Fonts mit den Gewichten 400 und 700 */
+
 body {
-  font-family: 'Open Sans', sans-serif;
-  background-color: #f5f5f5;
+  font-family: 'Open Sans', sans-serif; /* Verwendet die Open Sans-Schriftart für den Text im Body */
+  background-color: #f5f5f5; /* Setzt die Hintergrundfarbe des Body-Elements auf ein helles Grau (#f5f5f5) */
 }
 
 .card {
-  margin-top: 80px;
-  border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 80px; /* Legt den oberen Abstand der Karte auf 80px fest */
+  border: none; /* Entfernt den Kartenrand */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Setzt einen leicht verschwommenen Schatten um die Karte */
 }
 
 .card-title {
-  font-weight: 700;
-  color: #333;
+  font-weight: 700; /* Setzt das Gewicht des Kartentitels auf fett (700) */
+  color: #333; /* Setzt die Farbe des Kartentitels auf Dunkelgrau (#333) */
 }
 
 .form-group label {
-  font-weight: 700;
+  font-weight: 700; /* Setzt das Gewicht der Formularbeschriftung auf fett (700) */
 }
 
 .form-control:focus {
-  border-color: #6c757d;
-  box-shadow: none;
+  border-color: #6c757d; /* Setzt die Farbe des Formularfeldrahmens auf ein dunkleres Grau (#6c757d) beim Fokus */
+  box-shadow: none; /* Entfernt den Schatten des Formularfelds beim Fokus */
 }
 
 .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #007bff; /* Setzt die Hintergrundfarbe des Primärbuttons auf Blau (#007bff) */
+  border-color: #007bff; /* Setzt die Randfarbe des Primärbuttons auf Blau (#007bff) */
 }
 
 .btn-primary:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
+  background-color: #0069d9; /* Setzt die Hintergrundfarbe des Primärbuttons auf Dunkelblau (#0069d9) beim Hover */
+  border-color: #0062cc; /* Setzt die Randfarbe des Primärbuttons auf Dunkelblau (#0062cc) beim Hover */
 }
 
 .btn-primary:focus {
-  box-shadow: none;
+  box-shadow: none; /* Entfernt den Schatten des Primärbuttons beim Fokus */
 }
 
 .form-check-label {
-  font-weight: 400;
+  font-weight: 400; /* Setzt das Gewicht des Formular-Checklabels auf normal (400) */
 }
 
 @media only screen and (max-width: 768px) {
   .card {
-    margin-top: 50px;
+    margin-top: 50px; /* Legt den oberen Abstand der Karte auf 50px fest für Bildschirme mit einer Breite von höchstens 768px */
   }
 }

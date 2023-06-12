@@ -1,23 +1,24 @@
 <div class="d-flex justify-content-center">
     <form id="loginForm" class="mt-4 shadow-lg p-4 mb-5 bg-body-tertiary rounded-4">
-        <h3>Login</h3>
+        <h3>Login</h3> <!-- Überschrift -->
         <div class="mb-3">
             <label for="inputUsername" class="form-label">Username</label>
-            <input type="text" class="form-control" id="inputUsername" name="username" required>
+            <input type="text" class="form-control" id="inputUsername" name="username" required> <!-- Eingabefeld für den Benutzernamen -->
             <div class="invalid-feedback"></div>
             <div class="valid-feedback">Es sieht gut aus!</div>
         </div>
         <div class="mb-3">
             <label for="inputPassword" class="form-label">Passwort</label>
-            <input type="password" class="form-control" id="inputPassword" name="password" required>
+            <input type="password" class="form-control" id="inputPassword" name="password" required> <!-- Eingabefeld für das Passwort -->
             <div class="invalid-feedback"></div>
             <div class="valid-feedback">Es sieht gut aus!</div>
         </div>
         <div class="mb-3">
-            <button onclick="navigateTo('register')" type="button" class="btn btn-link">Du hast noch keinen Account? </button>
+            <button onclick="navigateTo('register')" type="button" class="btn btn-link">Du hast noch keinen Account? </button> <!-- Button zum Navigieren zur Registrierungsseite -->
         </div>
 
-        <button type="submit" class="btn btn-primary">Log in</button>
+        <button type="submit" class="btn btn-primary">Log in</button> <!-- Login-Button -->
     </form>
 </div>
+
 <script src="../loginvalidation.js"></script>

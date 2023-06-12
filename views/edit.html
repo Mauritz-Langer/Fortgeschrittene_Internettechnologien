@@ -1,68 +1,67 @@
-<script src="../editvalidation.js"></script>
+<script src="../editvalidation.js"></script> <!-- Einbinden der editvalidation.js -->
+
 <script !src="">
-        getAllCountries('#inputState')
-        $('#inputUsernameEdit').val(sessionStorage.getItem('username')).prop('disabled', true)
-        $('#inputZip').change(function() {
-            const iframe = $('#editMap')
-            getCityFromPostalCode($(this).val(), '#inputCity', iframe)
-        });
+    getAllCountries('#inputState') // Funktion aufrufen, um Länder in das Dropdown-Feld mit der ID "inputState" zu laden
+    $('#inputUsernameEdit').val(sessionStorage.getItem('username')).prop('disabled', true) // Den Wert des Benutzernamens aus dem Session Storage in das Eingabefeld mit der ID "inputUsernameEdit" einfügen und das Eingabefeld deaktivieren
+    $('#inputZip').change(function() {
+        const iframe = $('#editMap')
+        getCityFromPostalCode($(this).val(), '#inputCity', iframe) // Event-Handler für Änderungen am Eingabefeld mit der ID "inputZip". Ruft die Funktion auf, um die Stadt anhand der Postleitzahl zu ermitteln und in das Eingabefeld mit der ID "inputCity" einzufügen.
+    });
 </script>
 
 <div class="position-relative m-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded-4">
-<form id="setLocation" class="row g-3 m-4">
+    <form id="setLocation" class="row g-3 m-4">
         <h3>Standort erfassen</h3>
-    <div class="col-md-6">
-        <div class="row g-3">
-            <div class="col-md-12">
-                <label for="inputUsernameEdit" class="form-label">Benutzername</label>
-                <input type="text" class="form-control" id="inputUsernameEdit" name="inputUsernameEdit">
-            </div>
+        <div class="col-md-6">
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <label for="inputUsernameEdit" class="form-label">Benutzername</label>
+                    <input type="text" class="form-control" id="inputUsernameEdit" name="inputUsernameEdit"> <!-- Eingabefeld für den Benutzernamen -->
+                </div>
 
-            <div class="col-12">
-                <label for="inputStreet" class="form-label">Straße</label>
-                <input type="text" class="form-control" id="inputStreet" name="street" required>
-                <div class="invalid-feedback"></div>
-                <div class="valid-feedback">Es sieht gut aus!</div>
-            </div>
+                <div class="col-12">
+                    <label for="inputStreet" class="form-label">Straße</label>
+                    <input type="text" class="form-control" id="inputStreet" name="street" required> <!-- Eingabefeld für die Straße -->
+                    <div class="invalid-feedback"></div>
+                    <div class="valid-feedback">Es sieht gut aus!</div>
+                </div>
 
-            <div class="col-12">
-                <label for="inputHouseNumber" class="form-label">Hausnummer</label>
-                <input type="text" class="form-control" id="inputHouseNumber" name="housenumber" required>
-                <div class="invalid-feedback"></div>
-                <div class="valid-feedback">Es sieht gut aus!</div>
-            </div>
+                <div class="col-12">
+                    <label for="inputHouseNumber" class="form-label">Hausnummer</label>
+                    <input type="text" class="form-control" id="inputHouseNumber" name="housenumber" required> <!-- Eingabefeld für die Hausnummer -->
+                    <div class="invalid-feedback"></div>
+                    <div class="valid-feedback">Es sieht gut aus!</div>
+                </div>
 
-            <div class="col-md-12">
-                <label for="inputZip" class="form-label">PLZ</label>
-                <input type="text" class="form-control" id="inputZip" name="zip" required>
-                <div class="invalid-feedback"></div>
-                <div class="valid-feedback">Es sieht gut aus!</div>
-            </div>
-            <div class="col-md-12">
-                <label for="inputCity" class="form-label">Ort</label>
-                <input type="text" class="form-control" id="inputCity" name="city" required>
-                <div class="invalid-feedback"></div>
-                <div class="valid-feedback">Es sieht gut aus!</div>
-            </div>
-            <div class="col-md-12">
-                <label for="inputState" class="form-label">Land</label>
-                <select id="inputState" name="inputState" class="form-select">
-                </select>
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Speichern</button>
+                <div class="col-md-12">
+                    <label for="inputZip" class="form-label">PLZ</label>
+                    <input type="text" class="form-control" id="inputZip" name="zip" required> <!-- Eingabefeld für die Postleitzahl -->
+                    <div class="invalid-feedback"></div>
+                    <div class="valid-feedback">Es sieht gut aus!</div>
+                </div>
+                <div class="col-md-12">
+                    <label for="inputCity" class="form-label">Ort</label>
+                    <input type="text" class="form-control" id="inputCity" name="city" required> <!-- Eingabefeld für den Ort -->
+                    <div class="invalid-feedback"></div>
+                    <div class="valid-feedback">Es sieht gut aus!</div>
+                </div>
+                <div class="col-md-12">
+                    <label for="inputState" class="form-label">Land</label>
+                    <select id="inputState" name="inputState" class="form-select">
+                    </select> <!-- Dropdown-Feld für das Land -->
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Speichern</button> <!-- Speichern-Button -->
+                </div>
             </div>
         </div>
-
-    </div>
-    <div class="col-md-6">
-        <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
-            <div style="height:475px; width:100%;">
-                <iframe id="editMap" style="height:100%;width:100%;border-radius: 18px;"
-                        src="https://www.google.com/maps/embed/v1/place?q=+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+        <div class="col-md-6">
+            <div class="m-4 shadow-lg bg-body-tertiary rounded-4">
+                <div style="height:475px; width:100%;">
+                    <iframe id="editMap" style="height:100%;width:100%;border-radius: 18px;"
+                            src="https://www.google.com/maps/embed/v1/place?q=+Deutschland&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe> <!-- Google Maps iFrame zur Anzeige einer Karte -->
+                </div>
             </div>
         </div>
-    </div>
-
     </form>
 </div>
